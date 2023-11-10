@@ -19,21 +19,63 @@ class EquipamentosController extends Controller
             return view('equipamentos.create');
         
     }
-    public function edit()
+    public function edit($id)
     {
-      
-            return view('equipamentos.editar');
-        
+        $equipamento = Hardware::find($id);
+
+        return view('equipamentos.editar', ['equipamento' => $equipamento]);
     }
 
-    public function delete () 
+    public function update(Request $request, $id)
     {
-        return view('equipamentos.excluir');
+        $equipamento = Hardware::find($id);
+
+        $equipamento->nome = $request->nome;
+        $equipamento->marca = $request->marca;
+        $equipamento->quantidade = $request->quantidade;
+        $equipamento->data_cadastro = $request->data_cadastro;
+        $equipamento->descricao = $request->descricao;
+
+       
+        if ($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $caminhoImagem = $imagem->storeAs('public', $imagem->getClientOriginalName());
+            $equipamento->imagem = str_replace('public/', '', $caminhoImagem);
+        }
+
+        $equipamento->save();
+
+        return redirect('/equipamentos/estoque')->with('msg', 'Equipamento atualizado com sucesso');
     }
+
+    public function confirmDelete($id)
+{
+    $equipamento = Hardware::find($id);
+
+    return view('equipamentos.excluir', ['equipamento' => $equipamento]);
+}
+
+public function destroy($id)
+{
+    $equipamento = Hardware::find($id);
+
+    if (!$equipamento) {
+        return redirect('/equipamentos/estoque')->with('error', 'Equipamento não encontrado');
+    }
+
+   
+    if ($equipamento->imagem) {
+        Storage::delete('public/' . $equipamento->imagem);
+    }
+
+    $equipamento->delete();
+
+    return redirect('/equipamentos/estoque')->with('msg', 'Equipamento excluído com sucesso');
+}
 
     public function stock () 
     {
-        $hardware = Hardware::all();
+        $hardware = Hardware::paginate(5);
         return view('equipamentos.estoque',['hardware' => $hardware]);
     }
     
@@ -44,10 +86,10 @@ class EquipamentosController extends Controller
     $hardware->nome = $request->nome;
     $hardware->marca = $request->marca;
     $hardware->quantidade = $request->quantidade;
-    $hardware->data_cadastro = $request->data_cadastro;
-    $hardware->descricao = $request->descricao;
+    $hardware->data_cadastro = now();
+    $hardware->descricao = $request->descricao;     
 
-    // Upload de imagem
+
     if ($request->hasFile('imagem')) {
         $imagem = $request->file('imagem');
         $caminhoImagem = $imagem->storeAs('public', $imagem->getClientOriginalName());
@@ -56,9 +98,14 @@ class EquipamentosController extends Controller
 
     $hardware->save();
 
-    return redirect('/');
+    return redirect('/equipamentos/estoque')->with('msg', 'Evento criado com sucesso');
 }
 
-
+public function contato()
+    {
+      
+        return view('contato');
+        
+    }
 
 }
