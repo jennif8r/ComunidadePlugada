@@ -60,9 +60,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/equipamentos/estoque">Hardware</a>
                                 </li>
+                                @guest
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/auth/login">Login</a>
+                                    <a class="nav-link" href="/login">Login</a> 
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/register ">Registro</a> 
+                                </li>
+                                @endguest
+                                
                             </ul>
                         </div>
                     </div>
