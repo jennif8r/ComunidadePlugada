@@ -26,9 +26,9 @@
         </thead>
         <tbody>
             @foreach($hardware as $Equipamento)
-            <tr>
-            <td><img src="{{ asset('storage/' . $Equipamento->imagem) }}" alt="Imagem do Equipamento" class="img-thumbnail" style="width: 50px; height: 60px"></td>
-                <td>{{ $Equipamento->nome }}</td>
+            <tr>    
+            <td><img src="{{ url('storage/' . $Equipamento->imagem) }}" alt="Imagem do Equipamento" class="img-thumbnail" style="width: 50px; height: 60px"></td>
+                    <td>{{ $Equipamento->nome }}</td>
                 <td>{{ $Equipamento->quantidade }}</td>
                 <td>{{ $Equipamento->marca }}</td>
                 <td>{{ $Equipamento->descricao }}</td>

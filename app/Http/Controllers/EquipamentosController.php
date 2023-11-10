@@ -41,7 +41,6 @@ class EquipamentosController extends Controller
 {
     $hardware = new Hardware;
 
-    
     $hardware->nome = $request->nome;
     $hardware->marca = $request->marca;
     $hardware->quantidade = $request->quantidade;
@@ -51,14 +50,15 @@ class EquipamentosController extends Controller
     // Upload de imagem
     if ($request->hasFile('imagem')) {
         $imagem = $request->file('imagem');
-        $caminhoImagem = $imagem->storeAs('', $imagem->getClientOriginalName(), 'public');
-        $hardware->imagem = $caminhoImagem;
+        $caminhoImagem = $imagem->storeAs('public', $imagem->getClientOriginalName());
+        $hardware->imagem = str_replace('public/', '', $caminhoImagem);
     }
 
     $hardware->save();
 
     return redirect('/');
 }
+
 
 
 }
