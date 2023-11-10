@@ -45,34 +45,48 @@
     </head>
    <body>
          <head>
-                <nav class="navbar navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
-                    <div class="container-fluid">
-                    <div class="">
-                        <a class="" href="#">
-                        <img src="/img/comu.svg" alt="" width="40" height="40">
-                        </a>
-                    </div>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/equipamentos/estoque">Hardware</a>
-                                </li>
-                                @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/login">Login</a> 
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/register ">Registro</a> 
-                                </li>
-                                @endguest
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div class="">
+            <a class="" href="#">
+                <img src="/img/comu.svg" alt="" width="40" height="40">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="/equipamentos/estoque">Hardware</a>
+                </li>
+                @endauth
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                @auth
+                <li class="nav-item">
+                    <span class="nav-link">Bem-vindo, {{ Auth::user()->email }}</span>
+                </li>
+                <li class="nav-item">
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <a href="#" class="nav-link" onclick="event.preventDefault(); document.querySelector('form').submit();">Sair</a>
+                    </form>
+                </li>
+                @endauth
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register ">Registro</a>
+                </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
+</nav>
             
         </head>
         <main>
