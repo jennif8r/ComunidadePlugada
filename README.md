@@ -1,6 +1,6 @@
 # Projeto Comunidade Plugada
 
-Sistema desenvolvido para o projeto de TCC. O software foi desenvolvido na linguagem PHP com o framework em Laravel, foi implementado nesse projeto somente as funcionalidade de login ultilizando Jetstream e o controle de estoque com a opção de cadastrar equipamentos, editar e excluir. 
+Sistema desenvolvido para o projeto de TCC. O software foi desenvolvido na linguagem PHP com o framework em Laravel, foi implementado nesse projeto somente a funcionalidade de login ultilizando Jetstream e o controle de estoque com a opção de cadastrar equipamentos, editar e excluir. 
 
 ## Ambiente de Desenvolvimento
 O ambiente de desenvolvimento escolhido para este projeto é o Visual Studio Code. Esta IDE oferece suporte robusto para o desenvolvimento PHP e Laravel, facilitando a codificação, depuração e gerenciamento de dependências.
